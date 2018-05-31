@@ -14,23 +14,19 @@ For this I choose to utilize correctness of answers from users. Items are simila
 
 ![Similarity pipeline](pipeline_diagram.svg)
 
-Now I want to describe how to produce such projection that similar items are close to each other. Numbers in image correspond to stages of pipeline:
+Now I want to describe how to produce such projection that similar items are close to each other.
 
-1. At the start we have matrix (performance matrix) where each column corresponds to item and each row to user. Each corresponding position in matrix contains information about correctness of answer from use to a specific item. It contains value 1 in case of the correct answer and 0 for incorrect.
-2. This step is used to compute the similarity between all pairs of items. In other words, I transform performance matrix into similarity matrix. I use Pearson correlation coefficient for this.
-3. Similarity matrix is square containing similarity of all pairs of items It is symmetric, and all values at main diagonal are~$1.0$ (because each item is identical with itself).
-4. Dimensionality reduction is used to transform similarity matrix into a projection. I use Principal component analysis (PCA) to generate 2D visualization of similarities.
-5. Projection is more compact representation of similarity matrix used for visualizations for end users.
+I take data about user performance and compare each pair of items using Pearson correlation coefficient. This yelds us square matrix containing similarity of all pairs of items. After that I apply PCA to reduce this similarity matrix into a 2D projection. Projection is representation of items for visualizations for end users. Like image I showed.
 
 ## Pattern of missing data
 
-I did not mention this so far. BUt it is apparent that not all users answer all items. On the cotrary perforamnce matrix is relatively sparse. However, missing values are not distributed randomly, but they form a pattern.
+I did not mention this so far. But not all users answer all items. On the cotrary perforamnce matrix is relatively sparse. However, missing values are not distributed randomly, but they form a pattern.
 
-Our question is whether this pattern of missing values can affect similarity of items and projections.
+My question was whether this pattern can affect similarity of items and therefore projections.
 
 % structure of performance matrix
 
-Items in each topic of the system are divided into up to three levels. The difficulty of the levels differs. That is why users in the system usually do not solve all of the available levels. Less experienced users tend to solve only first or first two levels. But, more experienced users solve only higher levels.
+Items in each topic of the system are divided into up to three levels. The difficulty of the levels raises. Users in the system usually do not solve all of the levels. Less experienced users usually solve only first or first two levels. But, more experienced users solve only higher levels.
 
 This pattern is also shown in following diagram. Green corresponds to correct answer, red to incorrect and gray is missing answer.
 
