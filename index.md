@@ -15,6 +15,7 @@ For this I choose to utilize correctness of answers from users. We consider ques
 ## Similarity pipeline
 
 ![Similarity pipeline](pipeline_diagram.svg)
+
 First I take data about user performance and compare each pair of questions using Pearson correlation coefficient. This yelds us square matrix containing similarity of all pairs of questions. After that I apply PCA to reduce this similarity matrix into a 2D projection. Projection is representation of questions useful for visualizations for end users. Like image I showed.
 
 ## Pattern of missing data
